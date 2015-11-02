@@ -1,10 +1,8 @@
-# Rom::Tuid
+# TUID helpers for Ruby Object Mapper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rom/tuid`. To experiment with that code, run `bin/console` for an interactive prompt.
+Helpers to work with [TUIDs](https://github.com/sagmor/tuid) inside [ROM](http://rom-rb.org/).
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
+## Usage
 
 Add this line to your application's Gemfile:
 
@@ -12,27 +10,26 @@ Add this line to your application's Gemfile:
 gem 'rom-tuid'
 ```
 
-And then execute:
+Add TUID generation to `Create` commands:
 
-    $ bundle
+```ruby
+require 'rom/tuid'
 
-Or install it yourself as:
+class CreateUser < ROM::Commands::Create[:memory]
+  use :generate_tuid
+end
+```
 
-    $ gem install rom-tuid
+And an id will be generated when needed:
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+env.command(:users).create.call(name: 'Seba')
+#=> [{:id=>"5637b049-fc4f-4a7c-b8fc-9c3ed4250188", :name=>"Seba"}]
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rom-tuid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sagmor/rom-tuid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
