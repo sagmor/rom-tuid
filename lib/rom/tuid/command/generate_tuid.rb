@@ -3,7 +3,7 @@ module ROM
     module Command
       module GenerateTUID
         def execute(tuple)
-          super({id: ::TUID.new}.merge(tuple))
+          super({id: ::TUID.new.to_s}.merge(tuple))
         end
       end
     end
