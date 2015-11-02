@@ -1,7 +1,9 @@
+require "rom"
+require "tuid"
 require "rom/tuid/version"
+require "rom/tuid/command/generate_tuid"
 
-module Rom
-  module Tuid
-    # Your code goes here...
-  end
+ROM.plugins do
+  register :generate_tuid, ROM::TUID::Command::GenerateTUID, type: :command
 end
+
